@@ -84,7 +84,6 @@ function MagneticIcon({
 }
 
 export function Footer() {
-  const currentYear = new Date().getFullYear()
 
   const socialLinks = [
     { href: "https://github.com/dhimanlove", icon: <GithubLogo weight="regular" size={18} />, label: "GitHub" },
@@ -106,10 +105,7 @@ export function Footer() {
         >
           {/* Left - Brand */}
           <div className="space-y-4">
-            <h3
-              className="text-3xl font-bold text-foreground"
-              style={{ fontFamily: "Caveat, cursive", fontWeight: 400 }}
-            >
+            <h3 className="text-3xl font-bold text-foreground font-caveat">
               Grog.
             </h3>
             <div className="flex flex-col gap-1">

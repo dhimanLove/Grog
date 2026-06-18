@@ -1,12 +1,12 @@
-import { useRef, useState } from "react"
-import { motion, useScroll, useTransform, useSpring, useMotionValue, scale } from "framer-motion"
+import { useRef } from "react"
+import { motion, useScroll, useTransform, useSpring } from "framer-motion"
 import Lottie from "lottie-react"
 
-import brownBear from "/Websites/Grog/public/assets/lottie/Brown Bear.json"
-import catTyping from "/Websites/Grog/public/assets/lottie/Cat typing.json"
-import catMove from "/Websites/Grog/public/assets/lottie/Cat Movement.json"
-import bearDance from "/Websites/Grog/public/assets/lottie/Cute bear dancing.json"
-import danceCat from "/Websites/Grog/public/assets/lottie/Dance cat.json"
+import brownBear from "../assets/lottie/Brown Bear.json"
+import catTyping from "../assets/lottie/Cat typing.json"
+import catMove from "../assets/lottie/Cat Movement.json"
+import bearDance from "../assets/lottie/Cute bear dancing.json"
+import danceCat from "../assets/lottie/Dance cat.json"
 
 const steps = [
   { label: "01", headline: "Idea start small.", sub: "Like spark in dark.", body: "Fragment. Half-thought. Grog ready before idea form.", lottie: brownBear },
@@ -26,35 +26,14 @@ function LottieStage({ animationData }: { animationData: any }) {
       />
     </div>
   )
-} function InteractiveCard({ lottieSrc, scrollYProgress, i, total }: {
-  lottieSrc: any; // Changed from string to any
-  scrollYProgress: any;
-  i: number;
-  total: number;
+}
+
+function InteractiveCard({ lottieSrc, scrollYProgress, i, total }: {
+  lottieSrc: any
+  scrollYProgress: any
+  i: number
+  total: number
 }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null)
-
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
-
-  const smoothX = useSpring(mouseX, { stiffness: 80, damping: 25 })
-  const smoothY = useSpring(mouseY, { stiffness: 80, damping: 25 })
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!ref.current) return
-    const rect = ref.current.getBoundingClientRect()
-    mouseX.set(((e.clientX - rect.left) / rect.width - 0.5) * 2)
-    mouseY.set(((e.clientY - rect.top) / rect.height - 0.5) * 2)
-  }
-
-  const handleMouseLeave = () => {
-    mouseX.set(0)
-    mouseY.set(0)
-    setHoveredIdx(null)
-  }
-
-  // Calculate scale based on scroll position
   const start = i / total
   const end = (i + 1) / total
   const scale = useTransform(

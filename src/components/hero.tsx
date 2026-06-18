@@ -66,7 +66,7 @@ function MockupStack() {
                         {/* Float */}
                         <motion.div
                             animate={{ y: [0, -14 - idx * 3, 0] }}
-                            transition={{ duration: 5 + idx * 0.7, ease: "easeInOut", repeat: Infinity, delay: idx * 0.4 }}
+                            transition={{ duration: 5 + idx * 0.7, ease: "easeInOut", repeat: Number.POSITIVE_INFINITY, delay: idx * 0.4 }}
                         >
                             {/* Hover glow */}
                             <motion.div
