@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { supabase } from "@/lib/supabase"
+import { supabase, isSupabaseConfigured } from "@/lib/supabase"
 import type { User } from "@supabase/supabase-js"
 import {
   Envelope,
@@ -58,14 +58,19 @@ export function Download() {
   const [downloadStarted, setDownloadStarted] = useState(false)
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    if (!isSupabaseConfigured) {
+      setCheckingAuth(false)
+      return
+    }
+
+    supabase?.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null)
       setCheckingAuth(false)
     })
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+    const listener = supabase?.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null)
     })
-    return () => listener.subscription.unsubscribe()
+    return () => listener?.data?.subscription.unsubscribe()
   }, [])
 
   function clearErrors() {
@@ -74,10 +79,15 @@ export function Download() {
   }
 
   async function handleGoogleSignIn() {
+    if (!isSupabaseConfigured) {
+      setError({ field: "general", message: "Authentication is unavailable because Supabase is not configured." })
+      return
+    }
+
     clearErrors()
     setLoading(true)
     try {
-      const { error } = await supabase.auth.signInWithOAuth({
+      const { error } = await supabase!.auth.signInWithOAuth({
         provider: "google",
         options: { redirectTo: window.location.href },
       })
@@ -114,10 +124,15 @@ export function Download() {
       }
     }
 
+    if (!isSupabaseConfigured) {
+      setError({ field: "general", message: "Authentication is unavailable because Supabase is not configured." })
+      return
+    }
+
     setLoading(true)
     try {
       if (authMode === "signup") {
-        const { error } = await supabase.auth.signUp({
+        const { error } = await supabase!.auth.signUp({
           email,
           password,
           options: { data: { full_name: name.trim() } },
@@ -135,7 +150,7 @@ export function Download() {
           setPassword("")
         }
       } else {
-        const { error } = await supabase.auth.signInWithPassword({ email, password })
+        const { error } = await supabase!.auth.signInWithPassword({ email, password })
         if (error) {
           if (error.message.includes("Invalid login credentials")) {
             setError({ field: "general", message: "Invalid email or password." })
@@ -155,9 +170,14 @@ export function Download() {
 
   async function handleDownload() {
     if (!user) return
+    if (!isSupabaseConfigured) {
+      setError({ field: "general", message: "Download tracking is unavailable because Supabase is not configured." })
+      return
+    }
+
     setDownloadStarted(true)
     try {
-      await supabase.from("downloads").insert({ user_id: user.id })
+      await supabase!.from("downloads").insert({ user_id: user.id })
     } catch {
       // Non-critical — still allow download
     }
@@ -167,8 +187,13 @@ export function Download() {
   }
 
   async function handleSignOut() {
+    if (!isSupabaseConfigured) {
+      setError({ field: "general", message: "Authentication is unavailable because Supabase is not configured." })
+      return
+    }
+
     try {
-      await supabase.auth.signOut()
+      await supabase!.auth.signOut()
     } catch {
       setError({ field: "general", message: "Failed to sign out." })
     }

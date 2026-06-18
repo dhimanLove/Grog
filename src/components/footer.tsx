@@ -94,7 +94,7 @@ export function Footer() {
 
   return (
     <footer className="relative border-t border-foreground/5 py-16 mt-20">
-      <div className="relative max-w-6xl mx-auto px-6"> 
+      <div className="relative max-w-6xl mx-auto px-6">
         {/* Top section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -130,7 +130,7 @@ export function Footer() {
               { label: "Privacy", href: "#", icon: <SparkleIcon weight="regular" size={14} /> },
               { label: "Terms", href: "#", icon: <Code weight="regular" size={14} /> },
               { label: "GitHub", href: "#", icon: <GithubLogo weight="regular" size={14} /> },
-            
+
             ].map((link) => (
               <motion.a
                 key={link.label}
