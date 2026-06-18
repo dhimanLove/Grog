@@ -1,0 +1,284 @@
+import { useRef, useState } from "react"
+import { motion, useMotionValue, useTransform, useSpring } from "framer-motion"
+import { Pencil, Note, MapTrifold, Lightning, ArrowRight, Download, Sparkle } from "@phosphor-icons/react"
+
+const ease = [0.16, 1, 0.3, 1] as const
+
+const mockups = [
+    { src: "/assets/grog_green-portrait.png", alt: "Grog drawing interface — freeform sketching canvas", delay: 0.3, x: -300, rotate: -18, parallax: 0.7, glow: "rgba(16,185,129,0.15)", z: 10 },
+    { src: "/assets/Screenshot_2026-06-18-18-09-52-21_8a914f91e737d89b585e74d13e25cfcc-portrait.png", alt: "Grog writing interface — distraction-free note taking", delay: 0.5, x: 0, rotate: 0, parallax: 1, glow: "rgba(99,102,241,0.15)", z: 30 },
+    { src: "/assets/Screenshot_2026-06-18-18-06-00-24_8a914f91e737d89b585e74d13e25cfcc-portrait.png", alt: "Grog mindmap interface — visual idea connections", delay: 0.7, x: 300, rotate: 18, parallax: 0.5, glow: "rgba(168,85,247,0.15)", z: 20 },
+]
+
+function MockupStack() {
+    const ref = useRef<HTMLDivElement>(null)
+    const [hoveredIdx, setHoveredIdx] = useState<number | null>(null)
+
+    const mouseX = useMotionValue(0)
+    const mouseY = useMotionValue(0)
+
+    const smoothX = useSpring(mouseX, { stiffness: 80, damping: 25 })
+    const smoothY = useSpring(mouseY, { stiffness: 80, damping: 25 })
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        if (!ref.current) return
+        const rect = ref.current.getBoundingClientRect()
+        mouseX.set(((e.clientX - rect.left) / rect.width - 0.5) * 2)
+        mouseY.set(((e.clientY - rect.top) / rect.height - 0.5) * 2)
+    }
+
+    const handleMouseLeave = () => {
+        mouseX.set(0)
+        mouseY.set(0)
+        setHoveredIdx(null)
+    }
+
+    return (
+        <motion.div
+            ref={ref}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            className="relative w-full max-w-[700px] lg:max-w-[1000px] h-[360px] sm:h-[420px] lg:h-[520px] flex items-center justify-center"
+        >
+            {mockups.map((m, idx) => {
+                const px = useTransform(smoothX, [-1, 1], [-70 * m.parallax, 70 * m.parallax])
+                const py = useTransform(smoothY, [-1, 1], [-50 * m.parallax, 50 * m.parallax])
+                const pr = useTransform(smoothX, (v) => m.rotate + v * 12 * m.parallax)
+
+                const isHovered = hoveredIdx === idx
+                const isDimmed = hoveredIdx !== null && hoveredIdx !== idx
+
+                return (
+                    <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, scale: 0.8, y: 100 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        transition={{ duration: 1.2, ease, delay: m.delay }}
+                        className="absolute w-[160px] sm:w-[200px] lg:w-[250px]"
+                        onMouseEnter={() => setHoveredIdx(idx)}
+                        style={{
+                            x: px,
+                            y: py,
+                            rotate: pr,
+                            zIndex: isHovered ? 50 : m.z,
+                        }}
+                    >
+                        {/* Float */}
+                        <motion.div
+                            animate={{ y: [0, -14 - idx * 3, 0] }}
+                            transition={{ duration: 5 + idx * 0.7, ease: "easeInOut", repeat: Infinity, delay: idx * 0.4 }}
+                        >
+                            {/* Hover glow */}
+                            <motion.div
+                                className="absolute -inset-8 rounded-[40px] pointer-events-none"
+                                animate={{
+                                    opacity: isHovered ? 1 : 0,
+                                    scale: isHovered ? 1 : 0.8,
+                                }}
+                                transition={{ duration: 0.5 }}
+                                style={{ background: `radial-gradient(circle, ${m.glow} 0%, transparent 70%)` }}
+                            />
+
+                            {/* Image */}
+                            <motion.img
+                                src={m.src}
+                                alt={m.alt}
+                                loading="lazy"
+                                className="w-full h-auto block rounded-[22px] cursor-pointer select-none"
+                                animate={{
+                                    scale: isHovered ? 1.12 : isDimmed ? 0.92 : 1,
+                                    filter: isDimmed ? "brightness(0.4) saturate(0.3)" : "brightness(1) saturate(1)",
+                                }}
+                                transition={{ duration: 0.45, ease }}
+                                draggable={false}
+                            />
+                        </motion.div>
+                    </motion.div>
+                )
+            })}
+        </motion.div>
+    )
+}
+
+export function Hero() {
+    const features = [
+        { icon: Pencil, title: "Draw with Grog", desc: "Grog hold thy pencil. Sketch what mind see on infinite canvas." },
+        { icon: Note, title: "Write with Grog", desc: "Grog catch thy words. No distraction. No noise. Pure thought." },
+        { icon: MapTrifold, title: "Map with Grog", desc: "Grog tie thy ideas together. See how scattered thoughts connect." },
+        { icon: Lightning, title: "Trust Grog", desc: "Grog keep thy secrets. No cloud. No sync. Just thee and Grog." },
+    ]
+
+    return (
+        <section id="home" className="relative min-h-screen bg-background overflow-hidden">
+            {/* === VISIBLE GRID BACKGROUND === */}
+            <div
+                className="absolute inset-0 pointer-events-none z-0"
+                style={{
+                    backgroundImage:
+                        "radial-gradient(rgba(255, 255, 255, 0.14) 1.5px, transparent 1.5px)",
+                    backgroundSize: "25px 25px",
+                    opacity: 0.35,
+                }}
+            />
+
+            <div className="relative z-10">
+                {/* === HERO === */}
+                <div className="pt-28 sm:pt-36 lg:pt-44 pb-16 sm:pb-20 lg:pb-28">
+                    <div className="max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-16">
+                        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                            {/* LEFT — Content */}
+                            <div className="space-y-6 sm:space-y-8">
+
+
+
+                                {/* H1 */}
+                                <div className="overflow-show">
+                                    <motion.h1
+                                        initial={{ y: "110%" }}
+                                        animate={{ y: "0%" }}
+                                        transition={{ duration: 1, ease, delay: 0.08 }}
+                                        className="text-[5rem] sm:text-[7.5rem] lg:text-[10rem] text-foreground leading-[0.85]"
+                                        style={{ fontFamily: 'Caveat,regular', fontWeight: 400 }}
+                                    >
+                                        Grog.
+                                    </motion.h1>
+                                </div>
+
+                                {/* H2 */}
+                                <div className="overflow-show">
+                                    <motion.h2
+                                        initial={{ y: "110%" }}
+                                        animate={{ y: "0%" }}
+                                        transition={{ duration: 0.9, ease, delay: 0.18 }}
+                                        className="text-xl sm:text-2xl lg:text-5xl text-foreground/75 max-w-lg leading-snug"
+                                        style={{ fontFamily: 'Caveat,regular', fontWeight: 400 }}
+                                    >
+                                        Thy faithful scribe for drawing, writing, and mapping every thought.
+                                    </motion.h2>
+                                </div>
+
+                                {/* Body */}
+                                <motion.p
+                                    initial={{ opacity: 0, y: 12 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.8, ease, delay: 0.28 }}
+                                    className="text-base sm:text-lg text-muted-foreground/75 leading-relaxed max-w-lg"
+                                    style={{ fontFamily: 'Caveat,regular', fontWeight: 400, lineHeight: '1.7' }}
+                                >
+                                    When thought cometh, Grog catch it. When idea need shape, Grog give pencil. When words scatter like leaves in wind, Grog tie them together. No master above. No cloud to spy. Just thee, Grog, and thy thoughts.
+                                </motion.p>
+
+                                {/* CTAs */}
+                                <motion.div
+                                    initial={{ opacity: 0, y: 12 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.7, ease, delay: 0.42 }}
+                                    className="flex flex-col sm:flex-row gap-3 pt-2"
+                                >
+                                    <a
+                                        href="#download"
+                                        onClick={(e) => {
+                                            e.preventDefault()
+                                            const target = document.getElementById("download")
+                                            if (target) {
+                                                target.scrollIntoView({ behavior: "smooth", block: "start" })
+                                            }
+                                        }}
+                                        className="group relative inline-flex items-center justify-center gap-2.5 h-12 sm:h-14 px-6 sm:px-8 rounded-2xl bg-foreground text-background overflow-hidden transition-all duration-200 active:scale-[0.97]"
+                                        style={{
+                                            fontFamily: "Caveat, regular",
+                                            fontWeight: 400,
+                                            fontSize: "19px",
+                                        }}
+                                    >
+                                        <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                                        <span className="relative flex items-center gap-2.5">
+                                            <Download weight="bold" className="w-5 h-5" />
+                                            Summon Grog Free
+                                            <ArrowRight
+                                                weight="bold"
+                                                className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200"
+                                            />
+                                        </span>
+                                    </a>                      <a
+                                        href="#story"
+                                        className="inline-flex items-center justify-center gap-2 h-12 sm:h-14 px-6 sm:px-8 rounded-2xl border border-foreground/15 text-foreground/75 hover:border-foreground/30 hover:text-foreground hover:bg-foreground/[0.04] transition-all duration-200 active:scale-[0.97]"
+                                        style={{ fontFamily: 'Caveat,regular', fontWeight: 400, fontSize: '19px' }}
+                                    >
+                                        Know Grog better
+                                        <Sparkle weight="fill" className="w-4 h-4 text-foreground/40" />
+                                    </a>
+                                </motion.div>
+
+                                {/* Trust line */}
+                                <motion.p
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ duration: 0.6, delay: 0.6 }}
+                                    className="text-[11px] sm:text-xs text-muted-foreground/40 font-mono tracking-wide pt-2"
+                                >
+                                    Free forever · No account · No ads · Offline-first
+                                </motion.p>
+                            </div>
+
+                            {/* RIGHT — Mockups */}
+                            <div className="flex justify-start items-start lg:justify-end overflow-visible">
+                                <MockupStack />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* === FEATURES === */}
+                <div className="border-t border-foreground/[0.06]">
+                    <div className="max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-16 py-16 sm:py-20 lg:py-28">
+                        {/* Section label */}
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            className="text-[15px] font-mono tracking-[0.25em] uppercase text-muted-foreground/90 mb-10 sm:mb-14"
+                        >
+                            What Grog can do for thee
+                        </motion.p>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+                            {features.map((f, i) => (
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, y: 24 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, ease, delay: i * 0.08 }}
+                                    whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                                    className="group relative p-5 sm:p-6 lg:p-7 rounded-2xl border border-foreground/[0.06] bg-foreground/[0.015] hover:bg-foreground/[0.04] hover:border-foreground/[0.12] transition-all duration-300"
+                                >
+                                    {/* Hover glow */}
+                                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-foreground/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                                    <div className="relative">
+                                        <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-foreground/[0.04] border border-foreground/[0.08] flex items-center justify-center mb-5 group-hover:border-foreground/[0.15] transition-colors duration-300">
+                                            <f.icon weight="duotone" className="w-5 h-5 sm:w-6 sm:h-6 text-foreground/60 group-hover:text-foreground/80 transition-colors duration-300" />
+                                        </div>
+                                        <h3
+                                            className="text-lg sm:text-xl text-foreground mb-2"
+                                            style={{ fontFamily: 'Caveat,regular', fontWeight: 400 }}
+                                        >
+                                            {f.title}
+                                        </h3>
+                                        <p
+                                            className="text-sm text-muted-foreground/65 leading-relaxed"
+                                            style={{ fontFamily: 'Caveat,regular', fontWeight: 400, lineHeight: '1.5' }}
+                                        >
+                                            {f.desc}
+                                        </p>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
+}
