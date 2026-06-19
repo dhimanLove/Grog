@@ -182,7 +182,7 @@ export function Download() {
   function switchAuthMode() {
     setAuthMode(authMode === "signup" ? "login" : "signup")
     clearErrors()
-    setPassword("")
+    setPassword("") 
   }
 
   return (
