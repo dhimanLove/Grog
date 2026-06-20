@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://grog-brown.vercel.app/sitemap.xml
