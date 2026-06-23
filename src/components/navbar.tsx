@@ -115,9 +115,13 @@ export function Navbar() {
               e.preventDefault();
               scrollToSection("#home");
             }}
-            className="text-foreground font-bold text-lg tracking-tight bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-transparent flex-shrink-0 hover:opacity-85 transition-opacity"
+            className="flex-shrink-0 hover:opacity-85 transition-opacity"
           >
-            Grog
+            <img
+              src="public/assets/grog.png"
+              alt="Grog Logo"
+              className="h-12 w-auto"
+            />
           </a>
 
           {/* Desktop Nav */}
@@ -224,8 +228,8 @@ export function Navbar() {
                         scrollToSection(item.href);
                       }}
                       className={`flex items-center gap-3 text-2xl font-medium rounded-xl px-4 py-3 transition-all duration-300 ${isActive
-                          ? "text-foreground bg-white/[0.06] border border-white/[0.05] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]"
-                          : "text-foreground/80 hover:text-foreground hover:bg-white/[0.02]"
+                        ? "text-foreground bg-white/[0.06] border border-white/[0.05] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]"
+                        : "text-foreground/80 hover:text-foreground hover:bg-white/[0.02]"
                         }`}
                       style={{ fontFamily: 'Caveat, cursive' }}
                     >

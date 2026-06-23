@@ -1,106 +1,99 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+
 const themes = [
   {
     name: "Blood Moon",
-    bg: "#0A0A0A",
-    canvas: "#141414",
-    accent: "#FF3B30",
+    bg: "#070708",
+    canvas: "#111113",
+    accent: "#FF453A",
     text: "#FFFFFF",
-    muted: "#6B6B6B",
-    input: "#1E1E1E",
+    muted: "#545456",
+    input: "#1C1C1E",
   },
-
   {
     name: "Royal Gold",
-    bg: "#0D0D0D",
-    canvas: "#171717",
-    accent: "#F5C451",
-    text: "#FFF8E6",
-    muted: "#8B7A52",
-    input: "#202020",
+    bg: "#0A0905",
+    canvas: "#14130E",
+    accent: "#D4AF37",
+    text: "#FBF7ED",
+    muted: "#6E6652",
+    input: "#1E1C16",
   },
-
   {
     name: "Electric Blue",
-    bg: "#050B14",
-    canvas: "#0B1524",
-    accent: "#00A6FF",
-    text: "#F5FAFF",
-    muted: "#6C8BA8",
-    input: "#122033",
+    bg: "#030812",
+    canvas: "#0A1120",
+    accent: "#2F80ED",
+    text: "#E0ECFC",
+    muted: "#566B85",
+    input: "#131D31",
   },
-
   {
     name: "Neon Lime",
-    bg: "#080A08",
-    canvas: "#121512",
-    accent: "#B8FF2C",
-    text: "#F8FFF0",
-    muted: "#75805A",
-    input: "#1A1F1A",
+    bg: "#050705",
+    canvas: "#0F130F",
+    accent: "#A3E635",
+    text: "#F4FCE3",
+    muted: "#525E42",
+    input: "#171E17",
   },
-
   {
     name: "Crimson",
-    bg: "#120608",
-    canvas: "#1A0D10",
-    accent: "#FF1744",
-    text: "#FFF2F4",
-    muted: "#9B6A72",
-    input: "#261317",
+    bg: "#0C0406",
+    canvas: "#180C0F",
+    accent: "#E63946",
+    text: "#FDF0F2",
+    muted: "#7A5057",
+    input: "#241418",
   },
-
   {
     name: "Deep Purple",
-    bg: "#0E0818",
-    canvas: "#161024",
-    accent: "#9D4EDD",
-    text: "#F8F2FF",
-    muted: "#8B78A6",
-    input: "#1F1730",
+    bg: "#06030B",
+    canvas: "#120B20",
+    accent: "#9B5DE5",
+    text: "#F5EEFD",
+    muted: "#665280",
+    input: "#1B122C",
   },
-
   {
     name: "Arctic",
-    bg: "#F8FBFF",
+    bg: "#F4F7FA",
     canvas: "#FFFFFF",
     accent: "#007AFF",
-    text: "#0F172A",
-    muted: "#94A3B8",
-    input: "#F1F5F9",
+    text: "#1C1C1E",
+    muted: "#8E8E93",
+    input: "#F2F2F7",
   },
-
   {
     name: "Cream Paper",
-    bg: "#FDF6E3",
-    canvas: "#FFFDF7",
-    accent: "#D97706",
-    text: "#2C241B",
-    muted: "#A08B73",
-    input: "#FAF3E6",
+    bg: "#FAF6EE",
+    canvas: "#FCF9F2",
+    accent: "#C67A26",
+    text: "#332B24",
+    muted: "#948777",
+    input: "#F5EDE0",
   },
-
   {
     name: "Matrix",
-    bg: "#050805",
-    canvas: "#0B120B",
+    bg: "#020402",
+    canvas: "#081008",
     accent: "#00FF66",
-    text: "#E8FFE8",
-    muted: "#4F7A5C",
-    input: "#101810",
+    text: "#E5FFE5",
+    muted: "#3B6645",
+    input: "#0E1C0E",
   },
-
   {
     name: "Ferrari",
-    bg: "#0B0B0B",
-    canvas: "#151515",
-    accent: "#FF2800",
+    bg: "#050505",
+    canvas: "#121212",
+    accent: "#E00000",
     text: "#FFFFFF",
-    muted: "#777777",
-    input: "#1E1E1E",
+    muted: "#555555",
+    input: "#1A1A1A",
   },
 ]
+
 interface Theme {
   name: string
   bg: string
@@ -115,34 +108,33 @@ function AppPreview({ theme }: { theme: Theme }) {
   return (
     <motion.div
       layout
-      className="relative w-full max-w-[280px] sm:max-w-[300px] mx-auto aspect-[9/19] overflow-hidden"
+      className="relative w-full max-w-[290px] sm:max-w-[310px] mx-auto aspect-[9/19] overflow-hidden flex flex-col justify-between transition-shadow duration-500"
       style={{
         backgroundColor: theme.canvas,
-        borderRadius: "2.25rem",
+        borderRadius: "2.75rem",
+        boxShadow: `0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 40px -10px ${theme.accent}20`,
+        border: `1px solid ${theme.muted}15`
       }}
     >
-      {/* Top bar */}
-      <div className="flex items-center justify-between px-5 pt-8 pb-4">
+      {/* Top bar (approx 10% height) */}
+      <div className="flex items-center justify-between px-6 pt-8 pb-2">
         <span
-          className="text-xl"
+          className="text-2xl font-bold tracking-tight select-none"
           style={{ fontFamily: "Caveat, cursive", color: theme.text }}
         >
           grog.
         </span>
-        <div className="flex items-center gap-3">
-          {/* Circle icon */}
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={theme.muted} strokeWidth="1.5" strokeLinecap="round">
+        <div className="flex items-center gap-3.5">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={theme.muted} strokeWidth="1.75" strokeLinecap="round">
             <circle cx="12" cy="12" r="9" />
           </svg>
-          {/* Hand pointer icon */}
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={theme.text} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={theme.text} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
             <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0" />
             <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2" />
             <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8" />
             <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
           </svg>
-          {/* Trash icon */}
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={theme.muted} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={theme.muted} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
             <path d="M3 6h18" />
             <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
             <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
@@ -150,89 +142,113 @@ function AppPreview({ theme }: { theme: Theme }) {
         </div>
       </div>
 
-      {/* Canvas area - handwritten squiggles */}
-      <div className="flex-1 px-8 py-16 flex flex-col justify-center items-center">
-        <svg viewBox="0 0 160 80" className="w-full h-auto max-h-[120px]">
-          {/* Top squiggle */}
+      {/* Canvas area (approx 75% total vertical height) */}
+      <div className="flex-1 w-full px-6 flex flex-col justify-center items-center overflow-hidden">
+        <svg viewBox="0 0 160 280" className="w-full h-full opacity-95">
+          {/* Decorative Background Grid/Dots for app feel */}
+          <pattern id="dotPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <circle cx="2" cy="2" r="0.75" fill={theme.muted} opacity="0.15" />
+          </pattern>
+          <rect width="100%" height="100%" fill="url(#dotPattern)" />
+
+          {/* Random Abstract Fig 1: Continuous fluid loop */}
           <motion.path
-            d="M 20 25 C 30 10, 40 40, 50 25 C 60 10, 70 35, 80 20 C 90 5, 100 30, 110 20"
+            d="M 30 60 C 70 30, 130 40, 120 90 C 110 130, 20 80, 40 140 C 60 190, 140 150, 110 210"
             stroke={theme.text}
             strokeWidth="2.5"
             fill="none"
             strokeLinecap="round"
+            strokeLinejoin="round"
             initial={{ pathLength: 0 }}
             animate={{ pathLength: 1 }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
+            transition={{ duration: 1.6, ease: "easeInOut" }}
           />
-          {/* Bottom squiggle */}
+
+          {/* Random Abstract Fig 2: Rough hand-drawn geometric accent */}
           <motion.path
-            d="M 25 55 C 35 45, 45 65, 55 50 C 65 35, 75 60, 85 48 C 95 36, 105 58, 115 48"
-            stroke={theme.text}
-            strokeWidth="2.5"
-            fill="none"
+            d="M 110 70 L 135 95 L 105 110 Z"
+            stroke={theme.accent}
+            strokeWidth="2"
+            fill={`${theme.accent}08`}
             strokeLinecap="round"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 1.2, delay: 0.2, ease: "easeInOut" }}
+            strokeLinejoin="round"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 1, delay: 0.6, ease: "linear" }}
+          />
+
+          {/* Random Abstract Fig 3: Star/sparkle burst element */}
+          <motion.path
+            d="M 35 210 L 35 224 M 28 217 L 42 217"
+            stroke={theme.accent}
+            strokeWidth="2"
+            strokeLinecap="round"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 0.8 }}
+            transition={{ duration: 0.4, delay: 1.2 }}
+            style={{ transformOrigin: "35px 217px" }}
           />
         </svg>
       </div>
 
       {/* Divider */}
-      <div className="h-px w-full" style={{ backgroundColor: theme.muted }} />
+      <div className="h-px w-full opacity-10" style={{ backgroundColor: theme.muted }} />
 
-      {/* Input field */}
-      <div className="px-5 py-3">
-        <div className="flex items-center gap-1">
-          <span
-            className="text-xl"
-            style={{ fontFamily: "Caveat, cursive", color: theme.text }}
-          >
-            love
-          </span>
-          <motion.div
-            className="w-0.5 h-5"
-            style={{ backgroundColor: theme.text }}
-            animate={{ opacity: [1, 0, 1] }}
-            transition={{ duration: 0.9, repeat: Infinity }}
-          />
-        </div>
-      </div>
-
-      {/* Bottom bar */}
-      <div className="px-5 pb-8 flex items-center justify-between">
-        <span
-          className="text-base"
-          style={{ fontFamily: "Caveat, cursive", color: theme.muted }}
-        >
-          18.6
-        </span>
-        <div className="flex items-center gap-4">
+      {/* Bottom utility & input section (approx 15% height) */}
+      <div className="flex flex-col justify-end">
+        {/* Input field */}
+        <div className="px-6 py-2">
           <div className="flex items-center gap-1.5">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={theme.muted} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
-              <polyline points="16 6 12 2 8 6" />
-              <line x1="12" y1="2" x2="12" y2="15" />
-            </svg>
             <span
-              className="text-base"
-              style={{ fontFamily: "Caveat, cursive", color: theme.muted }}
+              className="text-xl"
+              style={{ fontFamily: "Caveat, cursive", color: theme.text }}
             >
-              share
+              love
             </span>
+            <motion.div
+              className="w-0.5 h-5 rounded-full"
+              style={{ backgroundColor: theme.accent }}
+              animate={{ opacity: [1, 0, 1] }}
+              transition={{ duration: 0.9, repeat: Infinity }}
+            />
           </div>
-          <div className="flex items-center gap-1.5">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={theme.accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
-            <span
-              className="text-base font-medium"
-              style={{ fontFamily: "Caveat, cursive", color: theme.accent }}
-            >
-              save
-            </span>
+        </div>
+
+        {/* Bottom actions bar */}
+        <div className="px-6 pb-8 pt-1 flex items-center justify-between select-none">
+          <span
+            className="text-base"
+            style={{ fontFamily: "Caveat, cursive", color: theme.muted }}
+          >
+            18.6
+          </span>
+          <div className="flex items-center gap-4.5">
+            <div className="flex items-center gap-1.5 cursor-pointer opacity-70 hover:opacity-100 transition-opacity">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={theme.muted} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                <polyline points="16 6 12 2 8 6" />
+                <line x1="12" y1="2" x2="12" y2="15" />
+              </svg>
+              <span
+                className="text-base"
+                style={{ fontFamily: "Caveat, cursive", color: theme.muted }}
+              >
+                share
+              </span>
+            </div>
+            <div className="flex items-center gap-1.5 cursor-pointer">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={theme.accent} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              <span
+                className="text-base font-medium"
+                style={{ fontFamily: "Caveat, cursive", color: theme.accent }}
+              >
+                save
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -252,13 +268,13 @@ export function Themes() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-16 sm:mb-20"
+          className="text-center mb-20"
         >
-          <span className="inline-block px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[9px] sm:text-[10px] font-mono tracking-widest uppercase text-white/40 mb-4 sm:mb-6">
+          <span className="inline-block px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[9px] sm:text-[10px] font-mono tracking-widest uppercase text-white/40 mb-5">
             Themes
           </span>
           <h2
-            className="text-4xl sm:text-5xl lg:text-6xl text-white mb-4 sm:mb-6 leading-[0.9]"
+            className="text-4xl sm:text-5xl lg:text-6xl text-white mb-5 leading-[0.9]"
             style={{ fontFamily: "Caveat, cursive", fontWeight: 400 }}
           >
             One space.
@@ -271,16 +287,17 @@ export function Themes() {
         </motion.div>
 
         {/* Main Layout */}
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-          {/* App Preview - Centered on mobile, left on desktop */}
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-14 lg:gap-20">
+          {/* App Preview Container */}
           <div className="w-full lg:w-1/2 flex justify-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTheme.name}
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
+                exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full"
               >
                 <AppPreview theme={activeTheme} />
               </motion.div>
@@ -289,7 +306,7 @@ export function Themes() {
 
           {/* Theme Selector */}
           <div className="w-full lg:w-1/2">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-2 sm:gap-3 max-w-md mx-auto lg:max-w-none">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-2.5 sm:gap-3.5 max-w-md mx-auto lg:max-w-none">
               {themes.map((theme) => {
                 const isActive = activeTheme.name === theme.name
                 return (
@@ -298,10 +315,11 @@ export function Themes() {
                     onClick={() => setActiveTheme(theme)}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="relative flex items-center gap-3 p-3 rounded-xl border text-left transition-all duration-300"
+                    className="relative flex items-center gap-3.5 p-4 rounded-2xl border text-left transition-all duration-300"
                     style={{
                       borderColor: isActive ? theme.accent : "rgba(255,255,255,0.06)",
-                      backgroundColor: isActive ? theme.bg : "rgba(255,255,255,0.02)",
+                      backgroundColor: isActive ? `${theme.bg}B3` : "rgba(255,255,255,0.02)",
+                      boxShadow: isActive ? `0 10px 30px -10px ${theme.accent}30` : "none"
                     }}
                   >
                     {/* Color dot */}
@@ -315,7 +333,7 @@ export function Themes() {
 
                     {/* Name */}
                     <span
-                      className="text-base sm:text-lg leading-none truncate"
+                      className="text-base sm:text-lg font-medium leading-none truncate"
                       style={{
                         fontFamily: "Caveat, cursive",
                         color: isActive ? theme.text : "rgba(255,255,255,0.4)",
@@ -333,7 +351,7 @@ export function Themes() {
                           exit={{ opacity: 0, scale: 0 }}
                           className="ml-auto"
                         >
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={theme.accent} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={theme.accent} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                             <polyline points="20 6 9 17 4 12" />
                           </svg>
                         </motion.div>

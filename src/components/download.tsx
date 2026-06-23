@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { supabase, isSupabaseConfigured } from "@/lib/supabase"
+import { OriginButton } from "@/components/ui/origin-button";
 import type { User } from "@supabase/supabase-js"
 import {
   Envelope,
@@ -12,7 +13,7 @@ import {
   DownloadIcon,
 } from "@phosphor-icons/react"
 
-const APK_URL = "https://www.upload-apk.com/O2oBBD1K3bztez9"
+const APK_URL = "https://github.com/dhimanLove/Grog/releases/download/v1.0.0/app-release.apk"
 
 // Regex patterns
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -182,7 +183,7 @@ export function Download() {
   function switchAuthMode() {
     setAuthMode(authMode === "signup" ? "login" : "signup")
     clearErrors()
-    setPassword("") 
+    setPassword("")
   }
 
   return (
@@ -197,14 +198,14 @@ export function Download() {
           transition={{ duration: 0.6 }}
           className="text-center mb-10"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             <span className="text-[10px] font-mono text-white/60 tracking-widest uppercase">v1.0 Early Access</span>
           </div>
           <h2 className="text-4xl font-bold text-white tracking-tight mb-2">
-            Get <span className="text-5xl font-normal text-white" style={{ fontFamily: "Caveat, cursive" }}>Grog</span>
+            Get <span className="text-5xl font-normal text-white" style={{ fontFamily: "Caveat, regular" }}>Grog</span>
           </h2>
-          <p className="text-sm text-white/40" style={{ fontFamily: "Caveat, cursive" }}>Sign in to download the APK.</p>
+          <p className="text-sm text-white/40" style={{ fontFamily: "Caveat, regular" }}>Sign in to download the APK.</p>
         </motion.div>
 
         {/* Main Card */}
@@ -212,7 +213,7 @@ export function Download() {
           initial={{ opacity: 0, y: 20, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="relative rounded-3xl border border-white/10 bg-zinc-900/60 backdrop-blur-2xl p-8"
+          className="relative rounded-3xl border border-white/10 bg-black/60 backdrop-blur-5xl p-8"
         >
           <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
 
@@ -237,23 +238,20 @@ export function Download() {
                   transition={{ duration: 0.4 }}
                   className="flex flex-col items-center text-center space-y-6"
                 >
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+                  <div className="w-14 h-14 rounded-2xl border border-white/10 bg-white/[0.03] flex items-center justify-center">
                     <UserIcon
                       weight="bold" className="w-6 h-6 text-white" />
                   </div>
 
                   <div className="space-y-1">
-                    <p className="text-xs text-white/40 font-medium uppercase tracking-wider">Signed in as</p>
-                    <p className="text-sm text-white font-medium truncate max-w-[250px]">{user.email}</p>
+                    <p className="text-xs text-white/40 font-medium uppercase tracking-wider "style={{ fontFamily: "Caveat, regular",fontSize: "12px" }}>Signed in as</p>
+                    <p className="text-sm text-white font-large truncate max-w-[250px]"style={{ fontFamily: "Caveat, regular",fontSize: "22px" }}>{user.email}</p>
                   </div>
 
-                  <motion.button
+                  <OriginButton
                     onClick={handleDownload}
                     disabled={downloadStarted}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full h-12 rounded-xl bg-white text-black font-semibold text-sm flex items-center justify-center gap-2 hover:bg-white/90 transition-colors disabled:opacity-70"
-                    style={{ fontFamily: "Caveat, cursive", fontSize: "20px" }}
+                    className="w-60 h-12"
                   >
                     {downloadStarted ? (
                       <>
@@ -266,15 +264,15 @@ export function Download() {
                         Download APK
                       </>
                     )}
-                  </motion.button>
+                  </OriginButton>
 
-                  <button
+                  <OriginButton
                     onClick={handleSignOut}
-                    className="flex items-center gap-1.5 text-xs text-white/30 hover:text-white/60 transition-colors"
+                    className="h-10 px-4 text-sm"
                   >
-                    <SignOut weight="regular" className="w-3.5 h-3.5" />
-                    Sign out
-                  </button>
+                    <SignOut weight="regular" className="w-4 h-4" />
+                    Sign Out
+                  </OriginButton>
                 </motion.div>
               ) : (
                 <motion.div
@@ -366,7 +364,7 @@ export function Download() {
                       whileHover={{ scale: 1.01 }}
                       whileTap={{ scale: 0.99 }}
                       className="w-full h-11 rounded-xl bg-white text-black font-semibold text-sm flex items-center justify-center gap-2 hover:bg-white/90 transition-colors disabled:opacity-50 mt-2"
-                      style={{ fontFamily: "Caveat, cursive", fontSize: "18px" }}
+                      style={{ fontFamily: "Caveat, regular", fontSize: "18px" }}
                     >
                       {loading ? (
                         <div className="w-4 h-4 rounded-full border-2 border-black/20 border-t-black animate-spin" />
@@ -380,14 +378,14 @@ export function Download() {
                   </form>
 
                   <div className="text-center pt-2">
-                    <p className="text-xs text-white/30">
+                    <p className="text-md text-white/30">
                       {authMode === "signup" ? "Already have an account?" : "Need an account?"}{" "}
-                      <button
+                      <OriginButton
                         onClick={switchAuthMode}
-                        className="text-white/70 hover:text-white font-medium transition-colors"
+                        className="text-white/50 hover:text-black font-xs transition-colors ml-2"
                       >
                         {authMode === "signup" ? "Sign in" : "Sign up"}
-                      </button>
+                      </OriginButton>
                     </p>
                   </div>
                 </motion.div>
@@ -401,7 +399,7 @@ export function Download() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="text-center text-[11px] text-white/20 mt-8 tracking-wide font-mono"
+          className="text-center text-[15px] text-white/30 mt-8 tracking-wide font-mono"
         >
           Free forever • No ads • Works offline
         </motion.p>

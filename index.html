@@ -1,53 +1,157 @@
 <!doctype html>
-
 <html lang="en">
 
 <head>
+  <!-- Character Encoding & Viewport -->
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-  <link rel="icon" type="image/png" href="/assets/caveman.png" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Grog - Creative Thinking, Notes & Mind Maps</title>
-  <link rel="canonical" href="https://grog-brown.vercel.app/" />
-
-  <meta property="og:url" content="https://grog-brown.vercel.app" />
-  <meta property="og:image" content="https://grog-brown.vercel.app/assets/caveman.png" />
-
-  <meta name="twitter:image" content="https://grog-brown.vercel.app/assets/caveman.png" />
-
-  <meta name="theme-color" content="#000000" />
-
-  <meta name="description"
-    content="Grog is a creative thinking app for notes, sketches, drawings, mind maps, and ideas. Capture thoughts, organize concepts, and create freely in one place." />
-
-  <meta name="keywords"
-    content="Grog, notes app, drawing app, mind map app, sketch app, productivity app, creative thinking app, note taking, brainstorming, ideas" />
-
-  <meta name="author" content="Grog" />
-  <meta name="robots" content="index, follow" />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Grog" />
-  <meta property="og:description" content="Write notes, create mind maps, sketch ideas, and think freely with Grog." />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Grog" />
-  <meta name="twitter:description" content="A creative space for notes, drawings, mind maps, and ideas." />
-
+  <!-- Preconnect & DNS Prefetch for Performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet" />
+  <!-- Favicon, Icons & Manifest -->
+  <link rel="icon" type="image/png" href="/assets/caveman.png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="/assets/caveman.png" sizes="180x180" />
+  <link rel="manifest" href="public/manifest.json" />
 
+  <!-- SEO: Title & Meta Description -->
+  <title>Grog - Offline Notes, Sketches & Mind Maps App</title>
+  <meta name="description" content="Grog is an offline notes app for creative thinking, sketches, drawings, mind maps, and ideas. Capture your thoughts freely without internet. Built by Love Dhiman." />
+  
+  <!-- Keywords & Author -->
+  <meta name="keywords" content="offline notes app, sketch app, mind map, drawing app, note taking, brainstorming, creative thinking, productivity app, offline writing" />
+  <meta name="author" content="Love Dhiman" />
+  
+  <!-- Robots & Theme Color -->
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="theme-color" content="#000000" />
+
+  <!-- Canonical URL (Prevents Duplicate Content) -->
+  <link rel="canonical" href="https://grog-brown.vercel.app" />
+
+  <!-- Open Graph - Social Media Sharing (Facebook, LinkedIn) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://grog-brown.vercel.app" />
+  <meta property="og:title" content="Grog - Offline Notes, Sketches & Mind Maps" />
+  <meta property="og:description" content="An offline creative thinking app for notes, sketches, mind maps, and ideas. Capture your thoughts without limits." />
+  <meta property="og:image" content="https://grog-brown.vercel.app/assets/caveman.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Grog" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card - Twitter Sharing -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://grog-brown.vercel.app" />
+  <meta name="twitter:title" content="Grog - Offline Notes & Sketches" />
+  <meta name="twitter:description" content="Create notes, sketches, and mind maps offline. No internet needed." />
+  <meta name="twitter:image" content="https://grog-brown.vercel.app/assets/caveman.png" />
+
+  <!-- Apple & Mobile Web App -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-title" content="Grog" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <!-- Security & Standards -->
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+  <!-- Google Fonts (with font-display for performance) -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- JSON-LD Structured Data: Software Application -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Grog",
+    "description": "An offline notes app for creative thinking, sketches, mind maps, and ideas. Capture your thoughts freely without internet.",
+    "url": "https://grog-brown.vercel.app",
+    "author": {
+      "@type": "Person",
+      "name": "Love Dhiman",
+      "url": "https://www.linkedin.com/in/love-dhiman"
+    },
+    "applicationCategory": "ProductivityApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "operatingSystem": "iOS, Android, Web",
+    "image": "https://grog-brown.vercel.app/assets/caveman.png",
+    "keywords": "offline notes, sketch, mind map, creative thinking, productivity",
+    "featureList": [
+      "Offline note-taking",
+      "Sketching and drawing",
+      "Mind map creation",
+      "Idea organization",
+      "Creative thinking"
+    ],
+    "screenshot": "https://grog-brown.vercel.app/assets/caveman.png"
+  }
+  </script>
+
+  <!-- JSON-LD Structured Data: Creator/Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Love Dhiman",
+    "url": "https://www.linkedin.com/in/love-dhiman",
+    "sameAs": [
+      "https://www.linkedin.com/in/love-dhiman"
+    ],
+    "description": "Creator of Grog - An offline notes and creative thinking app"
+  }
+  </script>
+
+  <!-- JSON-LD Structured Data: Breadcrumb (for SERPs) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://grog-brown.vercel.app"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' https: 'unsafe-inline'; style-src 'self' https: 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' https: data:;" />
 
 </head>
 
 <body>
+  <!-- React Root -->
   <div id="root"></div>
+
+  <!-- Main Application Script -->
   <script type="module" src="/src/main.tsx"></script>
+
+  <!-- Google Analytics - UNCOMMENT AND ADD YOUR GA_ID -->
+  <!-- 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_MEASUREMENT_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'YOUR_GA_MEASUREMENT_ID', {
+      'page_title': 'Grog - Offline Notes, Sketches & Mind Maps',
+      'page_path': '/'
+    });
+  </script>
+  -->
+
 </body>
 
 </html>

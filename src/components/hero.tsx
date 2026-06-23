@@ -1,6 +1,7 @@
 import { useRef, useState } from "react"
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion"
 import { Pencil, Note, MapTrifold, Lightning, ArrowRight, Download, Sparkle } from "@phosphor-icons/react"
+import { OriginButton } from "./origin-button"
 
 const ease = [0.16, 1, 0.3, 1] as const
 
@@ -129,8 +130,6 @@ export function Hero() {
                             {/* LEFT — Content */}
                             <div className="space-y-6 sm:space-y-8">
 
-
-
                                 {/* H1 */}
                                 <div className="overflow-show">
                                     <motion.h1
@@ -163,9 +162,9 @@ export function Hero() {
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.8, ease, delay: 0.28 }}
                                     className="text-base sm:text-lg text-muted-foreground/75 leading-relaxed max-w-lg"
-                                    style={{ fontFamily: 'Caveat,regular', fontWeight: 400, lineHeight: '1.7' }}
+                                    style={{ fontFamily: 'Caveat, regular', fontWeight: 400, lineHeight: '1.7' }}
                                 >
-                                    When thought cometh, Grog catch it. When idea need shape, Grog give pencil. When words scatter like leaves in wind, Grog tie them together. No master above. No cloud to spy. Just thee, Grog, and thy thoughts.
+                                    Capture ideas instantly, create mind maps, organize notes, and think clearly with Grog. Designed for creative thinkers, students, founders, and builders who need a fast, private, offline-first workspace for brainstorming, journaling, knowledge management, and productivity.
                                 </motion.p>
 
                                 {/* CTAs */}
@@ -175,40 +174,53 @@ export function Hero() {
                                     transition={{ duration: 0.7, ease, delay: 0.42 }}
                                     className="flex flex-col sm:flex-row gap-3 pt-2"
                                 >
-                                    <a
-                                        href="#download"
+                                    {/* Download Button */}
+                                    <OriginButton
                                         onClick={(e) => {
-                                            e.preventDefault()
-                                            const target = document.getElementById("download")
+                                            e.preventDefault();
+                                            const target = document.getElementById("download");
                                             if (target) {
-                                                target.scrollIntoView({ behavior: "smooth", block: "start" })
+                                                target.scrollIntoView({ behavior: "smooth", block: "start" });
                                             }
                                         }}
-                                        className="group relative inline-flex items-center justify-center gap-2.5 h-12 sm:h-14 px-6 sm:px-8 rounded-2xl bg-foreground text-background overflow-hidden transition-all duration-200 active:scale-[0.97]"
+                                        whileHover={{ backgroundColor: "#ffffff", color: "#000000" }}
+                                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                                        className="group bg-foreground text-background h-12 sm:h-14 px-6 sm:px-8 rounded-2xl border border-transparent"
                                         style={{
                                             fontFamily: "Caveat, regular",
                                             fontWeight: 400,
                                             fontSize: "19px",
                                         }}
                                     >
-                                        <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                        <Download weight="bold" className="w-5 h-5" />
+                                        Summon Grog Free
+                                        <ArrowRight
+                                            weight="bold"
+                                            className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200"
+                                        />
+                                    </OriginButton>
 
-                                        <span className="relative flex items-center gap-2.5">
-                                            <Download weight="bold" className="w-5 h-5" />
-                                            Summon Grog Free
-                                            <ArrowRight
-                                                weight="bold"
-                                                className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200"
-                                            />
-                                        </span>
-                                    </a>                      <a
-                                        href="#story"
-                                        className="inline-flex items-center justify-center gap-2 h-12 sm:h-14 px-6 sm:px-8 rounded-2xl border border-foreground/15 text-foreground/75 hover:border-foreground/30 hover:text-foreground hover:bg-foreground/[0.04] transition-all duration-200 active:scale-[0.97]"
-                                        style={{ fontFamily: 'Caveat,regular', fontWeight: 400, fontSize: '19px' }}
+                                    {/* Story Button */}
+                                    <OriginButton
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            const target = document.getElementById("story");
+                                            if (target) {
+                                                target.scrollIntoView({ behavior: "smooth", block: "start" });
+                                            }
+                                        }}
+                                        whileHover={{ backgroundColor: "#ffffff", color: "#000000" }}
+                                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                                        className="h-12 sm:h-14 px-6 sm:px-8 rounded-2xl border border-foreground/15 text-foreground/75"
+                                        style={{
+                                            fontFamily: "Caveat, regular",
+                                            fontWeight: 400,
+                                            fontSize: "19px"
+                                        }}
                                     >
                                         Know Grog better
                                         <Sparkle weight="fill" className="w-4 h-4 text-foreground/40" />
-                                    </a>
+                                    </OriginButton>
                                 </motion.div>
 
                                 {/* Trust line */}
@@ -230,54 +242,8 @@ export function Hero() {
                     </div>
                 </div>
 
-                {/* === FEATURES === */}
-                <div className="border-t border-foreground/[0.06]">
-                    <div className="max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-16 py-16 sm:py-20 lg:py-28">
-                        {/* Section label */}
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                            className="text-[15px] font-mono tracking-[0.25em] uppercase text-muted-foreground/90 mb-10 sm:mb-14"
-                        >
-                            What Grog can do for thee
-                        </motion.p>
+                {/* will add anything in future*/}
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-                            {features.map((f, i) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, y: 24 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.5, ease, delay: i * 0.08 }}
-                                    whileHover={{ y: -6, transition: { duration: 0.25 } }}
-                                    className="group relative p-5 sm:p-6 lg:p-7 rounded-2xl border border-foreground/[0.06] bg-foreground/[0.015] hover:bg-foreground/[0.04] hover:border-foreground/[0.12] transition-all duration-300"
-                                >
-                                    {/* Hover glow */}
-                                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-foreground/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                                    <div className="relative">
-                                        <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-foreground/[0.04] border border-foreground/[0.08] flex items-center justify-center mb-5 group-hover:border-foreground/[0.15] transition-colors duration-300">
-                                            <f.icon weight="duotone" className="w-5 h-5 sm:w-6 sm:h-6 text-foreground/60 group-hover:text-foreground/80 transition-colors duration-300" />
-                                        </div>
-                                        <h3
-                                            className="text-lg sm:text-xl text-foreground mb-2"
-                                            style={{ fontFamily: 'Caveat,regular', fontWeight: 400 }}
-                                        >
-                                            {f.title}
-                                        </h3>
-                                        <p
-                                            className="text-sm text-muted-foreground/65 leading-relaxed"
-                                            style={{ fontFamily: 'Caveat,regular', fontWeight: 400, lineHeight: '1.5' }}
-                                        >
-                                            {f.desc}
-                                        </p>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
     )
