@@ -118,7 +118,7 @@ export function Navbar() {
             className="flex-shrink-0 hover:opacity-85 transition-opacity"
           >
             <img
-              src="public/assets/grog.png"
+              src="/assets/grog.png"
               alt="Grog Logo"
               className="h-12 w-auto"
             />
