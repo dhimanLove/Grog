@@ -102,13 +102,6 @@ function MockupStack() {
 }
 
 export function Hero() {
-    const features = [
-        { icon: Pencil, title: "Draw with Grog", desc: "Grog hold thy pencil. Sketch what mind see on infinite canvas." },
-        { icon: Note, title: "Write with Grog", desc: "Grog catch thy words. No distraction. No noise. Pure thought." },
-        { icon: MapTrifold, title: "Map with Grog", desc: "Grog tie thy ideas together. See how scattered thoughts connect." },
-        { icon: Lightning, title: "Trust Grog", desc: "Grog keep thy secrets. No cloud. No sync. Just thee and Grog." },
-    ]
-
     return (
         <section id="home" className="relative min-h-screen bg-background overflow-hidden">
             {/* === VISIBLE GRID BACKGROUND === */}
@@ -137,7 +130,7 @@ export function Hero() {
                                         animate={{ y: "0%" }}
                                         transition={{ duration: 1, ease, delay: 0.08 }}
                                         className="text-[5rem] sm:text-[7.5rem] lg:text-[10rem] text-foreground leading-[0.85]"
-                                        style={{ fontFamily: 'Caveat,regular', fontWeight: 400 }}
+                                        style={{ fontFamily: 'Caveat', fontWeight: 400 }}
                                     >
                                         Grog.
                                     </motion.h1>
@@ -150,7 +143,7 @@ export function Hero() {
                                         animate={{ y: "0%" }}
                                         transition={{ duration: 0.9, ease, delay: 0.18 }}
                                         className="text-xl sm:text-2xl lg:text-5xl text-foreground/75 max-w-lg leading-snug"
-                                        style={{ fontFamily: 'Caveat,regular', fontWeight: 400 }}
+                                        style={{ fontFamily: 'Caveat', fontWeight: 400 }}
                                     >
                                         Thy faithful scribe for drawing, writing, and mapping every thought.
                                     </motion.h2>
@@ -162,7 +155,7 @@ export function Hero() {
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.8, ease, delay: 0.28 }}
                                     className="text-base sm:text-lg text-muted-foreground/75 leading-relaxed max-w-lg"
-                                    style={{ fontFamily: 'Caveat, regular', fontWeight: 400, lineHeight: '1.7' }}
+                                    style={{ fontFamily: 'Caveat', fontWeight: 400, lineHeight: '1.7' }}
                                 >
                                     Capture ideas instantly, create mind maps, organize notes, and think clearly with Grog. Designed for creative thinkers, students, founders, and builders who need a fast, private, offline-first workspace for brainstorming, journaling, knowledge management, and productivity.
                                 </motion.p>
@@ -183,11 +176,9 @@ export function Hero() {
                                                 target.scrollIntoView({ behavior: "smooth", block: "start" });
                                             }
                                         }}
-                                        whileHover={{ backgroundColor: "#ffffff", color: "#000000" }}
-                                        transition={{ duration: 0.3, ease: "easeInOut" }}
                                         className="group bg-foreground text-background h-12 sm:h-14 px-6 sm:px-8 rounded-2xl border border-transparent"
                                         style={{
-                                            fontFamily: "Caveat, regular",
+                                            fontFamily: "Caveat",
                                             fontWeight: 400,
                                             fontSize: "19px",
                                         }}
@@ -209,11 +200,9 @@ export function Hero() {
                                                 target.scrollIntoView({ behavior: "smooth", block: "start" });
                                             }
                                         }}
-                                        whileHover={{ backgroundColor: "#ffffff", color: "#000000" }}
-                                        transition={{ duration: 0.3, ease: "easeInOut" }}
                                         className="h-12 sm:h-14 px-6 sm:px-8 rounded-2xl border border-foreground/15 text-foreground/75"
                                         style={{
-                                            fontFamily: "Caveat, regular",
+                                            fontFamily: "Caveat",
                                             fontWeight: 400,
                                             fontSize: "19px"
                                         }}
@@ -241,8 +230,6 @@ export function Hero() {
                         </div>
                     </div>
                 </div>
-
-                {/* will add anything in future*/}
 
             </div>
         </section>
