@@ -1,6 +1,6 @@
 import { useRef, useState } from "react"
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion"
-import { Pencil, Note, MapTrifold, Lightning, ArrowRight, Download, Sparkle } from "@phosphor-icons/react"
+import { ArrowRight, Download, Sparkle } from "@phosphor-icons/react"
 import { OriginButton } from "./origin-button"
 
 const ease = [0.16, 1, 0.3, 1] as const
@@ -170,10 +170,10 @@ export function Hero() {
                                     {/* Download Button */}
                                     <OriginButton
                                         onClick={(e) => {
-                                            e.preventDefault();
-                                            const target = document.getElementById("download");
+                                            e.preventDefault()
+                                            const target = document.getElementById("download")
                                             if (target) {
-                                                target.scrollIntoView({ behavior: "smooth", block: "start" });
+                                                target.scrollIntoView({ behavior: "smooth", block: "start" })
                                             }
                                         }}
                                         className="group bg-foreground text-background h-12 sm:h-14 px-6 sm:px-8 rounded-2xl border border-transparent"
@@ -194,10 +194,10 @@ export function Hero() {
                                     {/* Story Button */}
                                     <OriginButton
                                         onClick={(e) => {
-                                            e.preventDefault();
-                                            const target = document.getElementById("story");
+                                            e.preventDefault()
+                                            const target = document.getElementById("story")
                                             if (target) {
-                                                target.scrollIntoView({ behavior: "smooth", block: "start" });
+                                                target.scrollIntoView({ behavior: "smooth", block: "start" })
                                             }
                                         }}
                                         className="h-12 sm:h-14 px-6 sm:px-8 rounded-2xl border border-foreground/15 text-foreground/75"
