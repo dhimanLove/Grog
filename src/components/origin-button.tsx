@@ -29,12 +29,12 @@ type ButtonHTMLAttributesForMotion = Omit<
 function getCoverDiameter(width: number, height: number, x: number, y: number) {
   return Math.ceil(
     2 *
-    Math.max(
-      Math.hypot(x, y),
-      Math.hypot(width - x, y),
-      Math.hypot(x, height - y),
-      Math.hypot(width - x, height - y)
-    )
+      Math.max(
+        Math.hypot(x, y),
+        Math.hypot(width - x, y),
+        Math.hypot(x, height - y),
+        Math.hypot(width - x, height - y)
+      )
   );
 }
 

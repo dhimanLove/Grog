@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { supabase, isSupabaseConfigured } from "@/lib/supabase"
-import { OriginButton } from "@/components/ui/origin-button";
+import { OriginButton } from "./origin-button";
 import type { User } from "@supabase/supabase-js"
 import {
   Envelope,
