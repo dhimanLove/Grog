@@ -23,7 +23,7 @@ export const isFirebaseConfigured = Object.values(firebaseConfig).every(
   (value) => value.trim().length > 0
 );
 
-if (!isFirebaseConfigured) {
+if (!isFirebaseConfigured && import.meta.env.DEV) {
   console.warn(
     "[Firebase] Missing Firebase configuration environment variables. Authentication is disabled."
   );

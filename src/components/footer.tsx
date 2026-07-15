@@ -3,7 +3,7 @@ import { motion, useMotionValue, useSpring } from "framer-motion"
 import {
   GithubLogo,
   LinkedinLogo,
-  XIcon,
+  XLogo,
   Envelope,
   Code,
   SparkleIcon,
@@ -88,7 +88,7 @@ export function Footer() {
   const socialLinks = [
     { href: "https://github.com/dhimanlove", icon: <GithubLogo weight="regular" size={18} />, label: "GitHub" },
     { href: "https://www.linkedin.com/in/love-raj-dhiman-a08142274/", icon: <LinkedinLogo weight="regular" size={18} />, label: "LinkedIn" },
-    { href: "https://x.com/LoveRaj_1", icon: <XIcon weight="regular" size={18} />, label: "X" },
+    { href: "https://x.com/LoveRaj_1", icon: <XLogo weight="regular" size={18} />, label: "X" },
     { href: "mailto:[rajdhiman00143@gmail.com]", icon: <Envelope weight="regular" size={18} />, label: "Email" },
   ]
 
