@@ -1,0 +1,62 @@
+{
+  "name": "Grog - Offline Notes, Sketches & Mind Maps",
+  "short_name": "Grog",
+  "description": "An offline notes app for creative thinking, sketches, drawings, mind maps, and ideas. Built by Love Dhiman.",
+  "scope": "/",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "dir": "ltr",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/assets/caveman.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/caveman.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/caveman.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/caveman.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/assets/caveman.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "categories": ["productivity"],
+  "shortcuts": [
+    {
+      "name": "New Note",
+      "short_name": "New Note",
+      "description": "Create a new note in Grog",
+      "url": "/?action=new-note",
+      "icons": [
+        {
+          "src": "/assets/caveman.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

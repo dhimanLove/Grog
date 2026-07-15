@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Character Encoding & Viewport -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <!-- Preconnect for Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Favicon, Icons & Manifest -->
+  <link rel="icon" type="image/png" href="/assets/caveman.png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="/assets/caveman.png" sizes="180x180" />
+  <link rel="manifest" href="/manifest.json" />
+
+  <!-- SEO: Title & Meta Description -->
+  <title>Grog - Offline Notes, Sketches & Mind Maps App</title>
+  <meta name="description"
+    content="Grog is an offline notes app for creative thinking, sketches, drawings, mind maps, and ideas. Capture your thoughts freely without internet. Built by Love Dhiman." />
+
+  <!-- Keywords & Author -->
+  <meta name="keywords"
+    content="offline notes app, sketch app, mind map, drawing app, note taking, brainstorming, creative thinking, productivity app, offline writing" />
+  <meta name="author" content="Love Dhiman" />
+
+  <!-- Robots & Theme Color -->
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+
+  <!-- Canonical URL (Prevents Duplicate Content) -->
+  <link rel="canonical" href="https://grog-brown.vercel.app" />
+
+  <!-- Open Graph - Social Media Sharing (Facebook, LinkedIn) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://grog-brown.vercel.app" />
+  <meta property="og:title" content="Grog - Offline Notes, Sketches & Mind Maps" />
+  <meta property="og:description"
+    content="An offline creative thinking app for notes, sketches, mind maps, and ideas. Capture your thoughts without limits." />
+  <meta property="og:image" content="https://grog-brown.vercel.app/assets/caveman.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Grog" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card - Twitter Sharing -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://grog-brown.vercel.app" />
+  <meta name="twitter:title" content="Grog - Offline Notes & Sketches" />
+  <meta name="twitter:description" content="Create notes, sketches, and mind maps offline. No internet needed." />
+  <meta name="twitter:image" content="https://grog-brown.vercel.app/assets/caveman.png" />
+
+  <!-- Apple & Mobile Web App -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Grog" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <!-- Security & Standards -->
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+  <!-- Google Fonts (with font-display for performance) -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+
+  <!-- JSON-LD Structured Data: Software Application -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Grog",
+    "description": "An offline notes app for creative thinking, sketches, mind maps, and ideas. Capture your thoughts freely without internet.",
+    "url": "https://grog-brown.vercel.app",
+    "author": {
+      "@type": "Person",
+      "name": "Love Dhiman",
+      "url": "https://www.linkedin.com/in/love-raj-dhiman-a08142274/"
+    },
+    "applicationCategory": "ProductivityApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "operatingSystem": "iOS, Android, Web",
+    "image": "https://grog-brown.vercel.app/assets/caveman.png",
+    "keywords": "offline notes, sketch, mind map, creative thinking, productivity",
+    "featureList": [
+      "Offline note-taking",
+      "Sketching and drawing",
+      "Mind map creation",
+      "Idea organization",
+      "Creative thinking"
+    ],
+    "screenshot": "https://grog-brown.vercel.app/assets/caveman.png"
+  }
+  </script>
+
+  <!-- JSON-LD Structured Data: Creator/Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Love Dhiman",
+    "url": "https://www.linkedin.com/in/love-raj-dhiman-a08142274/",
+    "sameAs": [
+      "https://www.linkedin.com/in/love-raj-dhiman-a08142274/"
+    ],
+    "description": "Creator of Grog - An offline notes and creative thinking app"
+  }
+  </script>
+
+  <!-- JSON-LD Structured Data: Breadcrumb (for SERPs) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://grog-brown.vercel.app"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self' https:; script-src 'self' https: 'unsafe-inline'; style-src 'self' https: 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' https: data:;" />
+
+</head>
+
+<body>
+  <div id="root">
+    <style>
+      .preloader-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        inset: 0;
+        background-color: #ffffff;
+        z-index: 9999;
+      }
+
+      .preloader-box {
+        position: relative;
+        width: 65px;
+        aspect-ratio: 1 / 1;
+      }
+
+      .preloader-span {
+        position: absolute;
+        border-radius: 50px;
+        box-shadow: inset 0 0 0 3px #0f0f0f;
+        animation: preloaderAnim 2.5s infinite;
+      }
+
+      .preloader-delay {
+        animation-delay: -1.25s;
+      }
+
+      @keyframes preloaderAnim {
+        0% {
+          inset: 0 35px 35px 0;
+        }
+
+        12.5% {
+          inset: 0 35px 0 0;
+        }
+
+        25% {
+          inset: 35px 35px 0 0;
+        }
+
+        37.5% {
+          inset: 35px 0 0 0;
+        }
+
+        50% {
+          inset: 35px 0 0 35px;
+        }
+
+        62.5% {
+          inset: 0 0 0 35px;
+        }
+
+        75% {
+          inset: 0 0 35px 35px;
+        }
+
+        87.5% {
+          inset: 0 0 35px 0;
+        }
+
+        100% {
+          inset: 0 35px 35px 0;
+        }
+      }
+
+      /* Hide preloader when React loads */
+      #root:not(:empty) .preloader-container {
+        display: none;
+      }
+    </style>
+    <div class="preloader-container">
+      <div class="preloader-box">
+        <span class="preloader-span"></span>
+        <span class="preloader-span preloader-delay"></span>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>
