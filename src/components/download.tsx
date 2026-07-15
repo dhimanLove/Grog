@@ -1,197 +1,133 @@
 import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
 import { useAuth } from "@/contexts/auth-context"
 import { GoogleSignIn } from "@/components/google-signin"
-import { Lock, CheckCircle, DownloadIcon, SignOut } from "@phosphor-icons/react"
 import { toast } from "sonner"
 
-const APK_URL =  "https://github.com/dhimanLove/Grog/releases/latest/download/Grog.apk"
+const APK_URL = "https://github.com/dhimanLove/Grog/releases/latest/download/Grog.apk"
 
 export function Download() {
   const { user, loading, logout } = useAuth()
-  const [downloadStarted, setDownloadStarted] = useState(false)
+  const [downloading, setDownloading] = useState(false)
+  const [imgError, setImgError] = useState(false)
 
-  async function handleDownload() {
-    if (!user) {
-      toast.error("You must be signed in to download")
-      return
-    }
-
-    setDownloadStarted(true)
-    try {
-      console.log(`Download started by ${user.email}`)
-      toast.success("Download started!")
-      
-      setTimeout(() => {
-        window.location.href = APK_URL
-        setDownloadStarted(false)
-      }, 800)
-    } catch (error) {
-      toast.error("Download failed. Please try again.")
-      setDownloadStarted(false)
-    }
+  function handleDownload() {
+    if (!user) return
+    setDownloading(true)
+    const a = document.createElement("a")
+    a.href = APK_URL
+    a.download = "Grog.apk"
+    a.rel = "noopener noreferrer"
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    toast.success("Downloading Grog.apk")
+    setTimeout(() => setDownloading(false), 2000)
   }
 
   async function handleLogout() {
-    try {
-      await logout()
-      toast.success("Signed out successfully!")
-    } catch (error) {
-      toast.error("Failed to sign out")
-    }
+    try { await logout() } catch { toast.error("Sign out failed") }
   }
 
+  const initials = (user?.displayName || user?.email || "?")[0].toUpperCase()
+
   return (
-    <section id="download" className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black py-24">
-      <div className="relative z-10 mx-auto w-full max-w-md px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="mb-10 text-center"
+    <section
+      id="download"
+      className="flex min-h-screen items-center justify-center bg-black px-6 py-24"
+    >
+      <div className="w-full max-w-[360px]">
+        {/* Card */}
+        <div
+          className="flex flex-col items-center px-8 pb-7 pt-9"
+          style={{ background: "#0c0c0c", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "20px" }}
         >
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
-            <span className="text-xs font-medium uppercase tracking-widest text-white/70">
-              v1.0 Early Access
+          {/* Title */}
+          <h2 className="mb-7 text-center text-[38px] font-bold leading-none tracking-tight text-white">
+            Get{" "}
+            <span style={{ fontFamily: "Caveat, cursive", fontWeight: 400, fontSize: "48px" }}>
+              Grog
             </span>
-          </div>
-          <h2 className="mb-2 text-4xl font-bold tracking-tight text-white">
-            Get <span className="text-5xl font-normal text-white" style={{ fontFamily: "Caveat, cursive" }}>Grog</span>
           </h2>
-          <p className="text-white/50" style={{ fontFamily: "Caveat, cursive", fontSize: "20px" }}>
-            Sign in to access your download.
-          </p>
-        </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
-          className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-xl"
-        >
-          <div className="relative">
-            <AnimatePresence mode="wait">
-              {loading ? (
-                <motion.div
-                  key="loading"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="flex flex-col items-center justify-center gap-4 py-16"
+          <div className="mb-7 h-px w-full" style={{ background: "rgba(255,255,255,0.06)" }} />
+
+          {loading ? (
+            <div className="flex items-center justify-center py-12">
+              <div className="h-5 w-5 animate-spin rounded-full border-2 border-white/10 border-t-emerald-400" />
+            </div>
+          ) : user ? (
+            <>
+              {/* Avatar with emerald ring */}
+              <div
+                className="mb-3.5 flex-shrink-0 p-0.5"
+                style={{ width: 72, height: 72, borderRadius: "50%", border: "2px solid #10b981" }}
+              >
+                <div
+                  className="flex h-full w-full items-center justify-center overflow-hidden"
+                  style={{ borderRadius: "50%", background: "#1a1a1a" }}
                 >
-                  <div className="h-6 w-6 animate-spin rounded-full border-2 border-white/10 border-t-emerald-400" />
-                  <p className="text-sm text-white/50">Verifying access...</p>
-                </motion.div>
-              ) : user ? (
-                <motion.div
-                  key="authenticated"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                  className="flex flex-col items-center space-y-8 text-center"
-                >
-                  <div className="w-full space-y-5">
-                    <div className="mx-auto flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border-2 border-white/10 bg-white/5">
-                      {user.photoURL ? (
-                        <img
-                          src={user.photoURL}
-                          alt={user.displayName || "Profile"}
-                          className="h-full w-full object-cover"
-                        />
-                      ) : (
-                        <Lock weight="fill" className="h-10 w-10 text-white/40" />
-                      )}
-                    </div>
-
-                    <div className="space-y-1">
-                      <p className="text-xs font-medium uppercase tracking-wider text-emerald-400">
-                        Welcome back
-                      </p>
-                      <p className="truncate text-3xl font-semibold text-white" style={{ fontFamily: "Caveat, cursive" }}>
-                        {user.displayName || user.email?.split("@")[0]}
-                      </p>
-                      <p className="text-sm text-white/40">{user.email}</p>
-                    </div>
-                  </div>
-
-                  <div className="w-full space-y-3">
-                    <motion.button
-                      onClick={handleDownload}
-                      disabled={downloadStarted}
-                      whileHover={{ scale: downloadStarted ? 1 : 1.02 }}
-                      whileTap={{ scale: downloadStarted ? 1 : 0.98 }}
-                      className="flex w-full items-center justify-center gap-3 rounded-2xl bg-emerald-500 py-4 text-lg font-semibold text-white transition-all hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-70"
-                      style={{ fontFamily: "Caveat, cursive", fontSize: "26px" }}
+                  {user.photoURL && !imgError ? (
+                    <img
+                      src={user.photoURL}
+                      alt=""
+                      className="h-full w-full object-cover"
+                      onError={() => setImgError(true)}
+                    />
+                  ) : (
+                    <span
+                      className="text-white/50"
+                      style={{ fontFamily: "Caveat, cursive", fontSize: "28px" }}
                     >
-                      {downloadStarted ? (
-                        <>
-                          <CheckCircle weight="bold" className="h-7 w-7 animate-pulse" />
-                          Downloading...
-                        </>
-                      ) : (
-                        <>
-                          <DownloadIcon weight="bold" className="h-7 w-7" />
-                          Download APK
-                        </>
-                      )}
-                    </motion.button>
+                      {initials}
+                    </span>
+                  )}
+                </div>
+              </div>
 
-                    <button
-                      onClick={handleLogout}
-                      className="flex w-full items-center justify-center gap-2 rounded-xl border border-transparent py-3 text-sm font-medium text-white/50 transition-all hover:border-white/10 hover:bg-white/5 hover:text-white"
-                    >
-                      <SignOut weight="bold" className="h-4 w-4" />
-                      Sign Out now
-                    </button>
-                  </div>
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="unauthenticated"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                  className="flex flex-col items-center justify-center space-y-8 py-4"
-                >
-                  <div className="flex flex-col items-center justify-center space-y-5 text-center">
-                    <motion.div
-                      animate={{ y: [0, -6, 0] }}
-                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                      className="flex h-20 w-20 items-center justify-center rounded-3xl border border-white/10 bg-white/5"
-                    >
-                      <Lock weight="duotone" className="h-10 w-10 text-emerald-400" />
-                    </motion.div>
-                    
-                    <div className="space-y-2">
-                      <h3 className="text-3xl font-semibold text-white" style={{ fontFamily: "Caveat, cursive" }}>
-                        Ready to install?
-                      </h3>
-                      <p className="mx-auto max-w-[260px] text-sm leading-relaxed text-white/50">
-                        Authenticate securely to access the latest build files.
-                      </p>
-                    </div>
-                  </div>
+              {/* Name + email */}
+              <p
+                className="mb-1 text-white"
+                style={{ fontFamily: "Caveat, cursive", fontSize: "32px", fontWeight: 600, lineHeight: 1 }}
+              >
+                {user.displayName || user.email?.split("@")[0]}
+              </p>
+              <p className="mb-7 text-[13px]" style={{ color: "rgba(255,255,255,0.35)" }}>
+                {user.email}
+              </p>
 
-                  <div className="flex w-full max-w-xs justify-center">
-                    <GoogleSignIn />
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        </motion.div>
+              {/* Download button */}
+              <button
+                onClick={handleDownload}
+                disabled={downloading}
+                className="mb-3.5 flex w-full items-center justify-center gap-2.5 py-3.5 text-white transition-colors hover:bg-emerald-400 disabled:opacity-50"
+                style={{ background: "#10b981", borderRadius: "12px", border: "none" }}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 3v13M6 11l6 6 6-6"/><path d="M3 19h18"/>
+                </svg>
+                <span style={{ fontFamily: "Caveat, cursive", fontSize: "26px", fontWeight: 600, lineHeight: 1 }}>
+                  {downloading ? "Starting…" : "Download APK"}
+                </span>
+              </button>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
-          className="mt-8 text-center text-xs text-white/30"
-        >
-          Secured by Google Authentication
-        </motion.p>
+              {/* Sign out */}
+              <button
+                onClick={handleLogout}
+                className="text-xs transition-colors hover:text-white/50"
+                style={{ color: "rgba(255,255,255,0.25)", background: "none", border: "none" }}
+              >
+                sign out
+              </button>
+            </>
+          ) : (
+            <div className="flex flex-col items-center gap-6 py-4 text-center">
+              <p style={{ fontFamily: "Caveat, cursive", fontSize: "22px", color: "rgba(255,255,255,0.4)" }}>
+                Sign in to download.
+              </p>
+              <GoogleSignIn />
+            </div>
+          )}
+        </div>
       </div>
     </section>
   )
